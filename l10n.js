@@ -339,9 +339,9 @@ document.webL10n = (function(window, document, undefined) {
       } else {
         consoleLog('no resource to load, early way out');
       }
+      gReadyState = 'complete';
       // early way out
       fireL10nReadyEvent(lang);
-      gReadyState = 'complete';
       return;
     }
 
@@ -352,8 +352,8 @@ document.webL10n = (function(window, document, undefined) {
       gResourceCount++;
       if (gResourceCount >= langCount) {
         callback();
-        fireL10nReadyEvent(lang);
         gReadyState = 'complete';
+        fireL10nReadyEvent(lang);
       }
     };
 
@@ -1180,7 +1180,7 @@ document.webL10n = (function(window, document, undefined) {
     ready: function(callback) {
       if (!callback) {
         return;
-      } else if (gReadyState == 'complete' || gReadyState == 'interactive') {
+      } else if (gReadyState == 'complete') {
         window.setTimeout(function() {
           callback();
         });
