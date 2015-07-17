@@ -302,6 +302,8 @@ document.webL10n = (function(window, document, undefined) {
 
   // load and parse all resources for the specified locale
   function loadLocale(lang, callback) {
+    gReadyState = 'interactive';
+
     // RFC 4646, section 2.1 states that language tags have to be treated as
     // case-insensitive. Convert to lowercase for case-insensitive comparisons.
     if (lang) {
@@ -994,8 +996,6 @@ document.webL10n = (function(window, document, undefined) {
 
   // load the default locale on startup
   function l10nStartup() {
-    gReadyState = 'interactive';
-
     // most browsers expose the UI language as `navigator.language'
     // but IE uses `navigator.userLanguage' instead
     var userLocale = navigator.language || navigator.userLanguage;
